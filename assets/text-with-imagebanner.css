@@ -1,0 +1,142 @@
+@font-face {
+    font-family: 'IvyMode';
+    src: url('https://cdn.shopify.com/s/files/1/0652/0566/5982/files/IvyMode-Regular.woff?v=1711202516') format('woff'),
+         url('https://cdn.shopify.com/s/files/1/0652/0566/5982/files/IvyMode-Regular.ttf?v=1711202518') format('truetype');
+}
+
+@font-face {
+    font-family: 'Aktiv Grotesk';
+    src: url('https://cdn.shopify.com/s/files/1/0652/0566/5982/files/AktivGrotesk-Thin.otf?v=1711204152') format('otf'),
+        url('https://cdn.shopify.com/s/files/1/0652/0566/5982/files/AktivGrotesk-Thin.otf?v=1711204152') format('truetype');
+}
+
+/* * {
+    font-family: 'IvyMode';
+} */
+
+.text-with-imagebanner-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-with-imagebanner__text {
+    width: 50%;
+}
+
+.text-with-imagebanner__text-box {
+
+    max-width: 320px;
+    font-size: 48px;
+    line-height: 1.1;
+}
+
+.text-with-imagebanner__text-box p {
+    margin: 0;
+    font-family: 'IvyMode';
+}
+
+.imagebanner_subtext {
+    text-align: right;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.imagebanner-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.imagebanner {
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    border-radius: 25px;
+    padding: 15px 25px;
+    min-height: 0;
+    color: #000 !important;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button .button-text {
+    color: #000 !important;
+}
+
+.button svg {
+    margin-left: 10px;
+}
+
+.button::before, .button::after {
+    display: none !important;
+}
+
+.imagebanner {
+    margin-top: 80px;
+}
+
+.imagebanner:first-of-type {
+    margin-top: 0;
+}
+
+.imagebanner__info {
+    max-width: 390px;
+}
+
+.imagebanner__title {
+    font-size: 32px;
+    line-height: 1.1;
+    margin-top: 40px;
+    margin-bottom: 25px;
+}
+
+.imagebanner__description {
+    font-size: 15px;
+    line-height: 1.5;
+    font-family: 'Aktiv Grotesk';
+}
+
+.imagebanner__button {
+    margin-top: 30px;
+}
+
+.imagebanner__image img {
+    max-width: 100%;
+}
+
+@media (max-width: 749px) {
+    .text-with-imagebanner-container {
+        flex-wrap: wrap;
+    }
+
+    .text-with-imagebanner__text, .imagebanner-container {
+        width: 100%;
+    }
+
+    .imagebanner {
+        margin-top: 50px;
+    }
+    
+    .imagebanner:first-of-type {
+        margin-top: 40px;
+    }
+
+    .imagebanner__title {
+        margin: 30px 0 15px;
+    }
+
+    .imagebanner__button {
+        margin-top: 20px;
+    }
+
+    .button--primary {
+        background-color: #ffffff;
+    }
+
+    .button svg {
+        display: none;
+    }
+}
