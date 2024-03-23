@@ -1,0 +1,160 @@
+{{ 'text-with-imagebanner.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  .section--{{ section.id }} {
+    background-color: {{ section.settings.back_color }};
+  }
+
+  .section--{{ section.id }} * {
+    color: {{ section.settings.text_color }};
+  }
+
+  .section--{{ section.id }} {
+    padding: 100px 0;
+  }
+
+  @media (max-width: 749px) {
+    .section--{{ section.id }} {
+        padding: 40px 0;
+    }
+  }
+{%- endstyle -%}
+
+<div class="section--{{ section.id }}">
+    <div class="page-width">
+        <div class="text-with-imagebanner-container">
+            <div class="text-with-imagebanner__text">
+                <div class="text-with-imagebanner__text-box">
+                    <p class="imagebanner_text">{{ section.settings.text }}</p>
+                    <p class="imagebanner_subtext">{{ section.settings.subtext }}</p>
+                </div>
+            </div>
+            <div class="imagebanner-container">
+                {%- for block in section.blocks -%}
+                <div class="imagebanner">
+                    <div class="imagebanner__image">
+                        {{ block.settings.image | img_url: '550x' | img_tag }}
+                    </div>
+                    <div class="imagebanner__info">
+                        <p class="imagebanner__title">{{ block.settings.title }}</p>
+                        <div class="imagebanner__description">{{ block.settings.description }}</div>
+                        <div class="imagebanner__button">
+                            <a href="{{ block.settings.btn_url }}" class="button button--{{ block.settings.btn_style }}">
+                                <span class="button-text">{{ block.settings.btn_text }}</span>
+                                {% if block.settings.btn_arrow %}
+                                    {% render 'icon-btn-arrow' %}
+                                {% endif %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {%- endfor -%}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "text with image banner",
+    "tag": "section",
+    "class": "text-with-imagebanner",
+    "settings": [
+      {
+        "type": "text",
+        "id": "text",
+        "label": "Text",
+        "default": "Hear better"
+      },
+      {
+        "type": "text",
+        "id": "subtext",
+        "label": "Subtext",
+        "default": "Better"
+        },
+        {
+            "type": "header",
+            "content": "Color"
+        },
+        {
+            "type": "color",
+            "id": "text_color",
+            "label": "Text Color",
+            "default": "#ffffff"
+        },
+        {
+            "type": "color",
+            "id": "back_color",
+            "label": "Background Color",
+            "default": "#000000"
+        }
+    ],
+    "blocks": [
+      {
+        "type": "imagebanner",
+        "name": "image banner",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "title",
+                "default": "text"
+            },
+            {
+                "type": "richtext",
+                "id": "description",
+                "label": "Description",
+                "default": "<p>text</p>"
+            },
+            {
+                "type": "header",
+                "content": "Button"
+            },
+            {
+                "type": "text",
+                "id": "btn_text",
+                "label": "Button Text"
+            },
+            {
+                "type": "url",
+                "id": "btn_url",
+                "label": "Button url"
+            },
+            {
+                "type": "select",
+                "options": [
+                    {
+                        "value": "primary",
+                        "label": "Primary"
+                    },
+                    {
+                        "value": "secondary",
+                        "label": "Secondary"
+                    }
+                ],
+                "id": "btn_style",
+                "label": "BUtton Style",
+                "default": "primary"
+            },
+            {
+                "type": "checkbox",
+                "id": "btn_arrow",
+                "label": "Button Arrow",
+                "default": false
+            }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "text with imagebanner",
+        "settings": {
+        }
+      }
+    ]
+  }
+{% endschema %}
