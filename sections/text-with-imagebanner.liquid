@@ -38,11 +38,9 @@
                         <p class="imagebanner__title">{{ block.settings.title }}</p>
                         <div class="imagebanner__description">{{ block.settings.description }}</div>
                         <div class="imagebanner__button">
-                            <a href="{{ block.settings.btn_url }}" class="button button--{{ block.settings.btn_style }}">
+                            <a href="{{ block.settings.btn_url }}" class="button">
                                 <span class="button-text">{{ block.settings.btn_text }}</span>
-                                {% if block.settings.btn_arrow %}
-                                    {% render 'icon-btn-arrow' %}
-                                {% endif %}
+                                {% render 'icon-btn-arrow' %}
                             </a>
                         </div>
                     </div>
@@ -123,28 +121,6 @@
                 "type": "url",
                 "id": "btn_url",
                 "label": "Button url"
-            },
-            {
-                "type": "select",
-                "options": [
-                    {
-                        "value": "primary",
-                        "label": "Primary"
-                    },
-                    {
-                        "value": "secondary",
-                        "label": "Secondary"
-                    }
-                ],
-                "id": "btn_style",
-                "label": "BUtton Style",
-                "default": "primary"
-            },
-            {
-                "type": "checkbox",
-                "id": "btn_arrow",
-                "label": "Button Arrow",
-                "default": false
             }
         ]
       }
