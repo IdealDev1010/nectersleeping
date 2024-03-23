@@ -60,6 +60,11 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    transition: 0.3s;
+}
+
+.button:not(:hover) {
+    background-color: #ffffff;
 }
 
 .button .button-text {
@@ -68,6 +73,10 @@
 
 .button svg {
     margin-left: 10px;
+}
+
+.button:not(:hover) svg {
+    display: none;
 }
 
 .button::before, .button::after {
@@ -132,11 +141,4 @@
         margin-top: 20px;
     }
 
-    .button--primary {
-        background-color: #ffffff;
-    }
-
-    .button svg {
-        display: none;
-    }
 }
