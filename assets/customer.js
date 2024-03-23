@@ -83,3 +83,6 @@ class CustomerAddresses {
     }
   };
 }
+
+
+const variantFirmnessArray = variant.map []
