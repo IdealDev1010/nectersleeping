@@ -6,9 +6,17 @@
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "vraiant_page_XAEYEG": {
+      "type": "vraiant-page",
+      "settings": {
+        "product_variant": "ring",
+        "columns_desktop": 3
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "vraiant_page_XAEYEG"
   ]
 }

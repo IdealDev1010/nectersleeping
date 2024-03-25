@@ -1,5 +1,27 @@
 {
   "sections": {
+    "video_FXDghB": {
+      "type": "video",
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "heading_size": "h1",
+        "enable_video_looping": true,
+        "video": "shopify:\/\/files\/videos\/bh187-minions.mp4",
+        "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+        "description": "",
+        "full_width": false,
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    },
+    "video_banner_z8Gnwd": {
+      "type": "video-banner",
+      "settings": {
+        "video": "shopify:\/\/files\/videos\/bh187-minions.mp4"
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -79,9 +101,7 @@
             "title": "Hearing loss",
             "description": "<p>We get it. “Prescription hearing tech” might feel like a big, scary thing. But we want to make it a no-brainer.<\/p>",
             "btn_text": "Learn More",
-            "btn_url": "#",
-            "btn_style": "primary",
-            "btn_arrow": true
+            "btn_url": "#"
           }
         },
         "imagebanner_fjV6jc": {
@@ -91,9 +111,7 @@
             "title": "Tinnitus relief",
             "description": "<p>Although we are loud and proud sound advocates, we also appreciate the need for blissful quiet.<\/p>",
             "btn_text": "Learn More",
-            "btn_url": "#",
-            "btn_style": "secondary",
-            "btn_arrow": false
+            "btn_url": "#"
           }
         }
       },
@@ -110,6 +128,8 @@
     }
   },
   "order": [
+    "video_FXDghB",
+    "video_banner_z8Gnwd",
     "image_banner",
     "featured_collection",
     "text_with_imagebanner_qKNHq6"
