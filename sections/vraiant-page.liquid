@@ -2,15 +2,16 @@
 
 {%- assign product = section.settings.product_variant -%}
 <div class="product-variant">
-    <ul  class="
+    <div  class="
       grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
       grid--{{ section.settings.columns_desktop }}-col-desktop
     ">
         {% for variant in product.variants %}
             {% if variant.available %}
-          <li class="grid__item">
+          <div class="grid__item">
             {% if variant.image %}
-              <img
+              <div class="variant-image">
+                <img
                 src="{{ variant.image.src | image_url }}"
                 alt="{{ variant.image.alt | escape }}"
                 role="presentation"
@@ -18,24 +19,106 @@
                 width="auto"
                 loading="lazy"
               >
+                <label class="switch">
+                  <input type="checkbox">
+                  <span class="slider round"></span>
+                </label>
+                
+              </div>
             {% endif %}
             <div class="variant-info">
-              <div class="variant-subtitle">{{ variant.metafields.custom.subtitle }}</div>
-              <div class="variant-subtitle">{{ variant.metafields.custom.description}}</div>
-              <div class="variant-values">
-                <div class="variant-firmness">{{ variant.metafields.custom.firmness }}</div>
-               
-                <div class="variant-subtitle">{{ variant.metafields.custom.firmness_value }}</div>
+              <div class="variant-detail">
+                <div class="variant-subtitle">{{ variant.metafields.custom.subtitle }}</div>
+                <div class="variant-description">{{ variant.metafields.custom.description}}</div>
+                <div class="variant-values">
+                    <div class="variant-values__firmness">
+                      <div class="variant-element">{{ variant.metafields.custom.firmness }}</div>
+                      {% assign active_value = variant.metafields.custom.firmness_value.value %}
+                      {% assign floorNumber = active_value | floor %}
+                      {% assign ceilNumber = active_value | ceil %}
+                      {%- assign rest_value = 5 | minus: ceilNumber -%}
+                      <div class="variant-values__wrapper">
+                        {% for i in (1..5) limit:ceilNumber %}
+                            <span class="progress-bar__list {{ value | handleize }} {% if floorNumber!=ceilNumber and forloop.last %}half{% endif %}"></span>
+                        {% endfor %}
+                          {% for i in (1..5) limit:rest_value %}
+                          <span class="progress-bar__list rest_value {{ value | handleize }} {% if floorNumber!=ceilNumber and forloop.last %}{% endif %}"></span>
+                          {% endfor %}
+                      </div>
+                    </div>
+
+                    <div class="variant-values__support">
+                      <div class="variant-element">{{ variant.metafields.custom.support }}</div>
+                      {% assign active_value = variant.metafields.custom.support_values.value %}
+                      {% assign floorNumber = active_value | floor %}
+                      {% assign ceilNumber = active_value | ceil %}
+                      {%- assign rest_value = 5 | minus: ceilNumber -%}
+                      <div class="variant-values__wrapper">
+                        {% for i in (1..5) limit:ceilNumber %}
+                            <span class="progress-bar__list {{ value | handleize }} {% if floorNumber!=ceilNumber and forloop.last %}half{% endif %}"></span>
+                        {% endfor %}
+                        {% for i in (1..5) limit:rest_value %}
+                        <span class="progress-bar__list rest_value {{ value | handleize }} {% if floorNumber!=ceilNumber and forloop.last %}{% endif %}"></span>
+                        {% endfor %}
+                      </div>
+                    </div>
+
+                    <div class="variant-values__cooling">
+                      <div class="variant-element">{{ variant.metafields.custom.cooling }}</div>
+                      {% assign active_value = variant.metafields.custom.cooling_value.value %}
+                      {% assign floorNumber = active_value | floor %}
+                      {% assign ceilNumber = active_value | ceil %}
+                      {%- assign rest_value = 5 | minus: ceilNumber -%}
+                      <div class="variant-values__wrapper">
+                        {% for i in (1..5) limit:ceilNumber %}
+                            <span class="progress-bar__list {{ value | handleize }} {% if floorNumber!=ceilNumber and forloop.last %}half{% endif %}"></span>
+                        {% endfor %}
+                        {% for i in (1..5) limit:rest_value %}
+                        <span class="progress-bar__list rest_value {{ value | handleize }} {% if floorNumber!=ceilNumber and forloop.last %}{% endif %}"></span>
+                        {% endfor %}
+                      </div>
+                    </div>
+
+                    <div class="variant-values__pressure">
+                      <div class="variant-element">{{ variant.metafields.custom.pressure_relief }}</div>
+                      {% assign active_value = variant.metafields.custom.pressure_relief_value.value %}
+                      {% assign floorNumber = active_value | floor %}
+                      {% assign ceilNumber = active_value | ceil %}
+                      {%- assign rest_value = 5 | minus: ceilNumber -%}
+                      <div class="variant-values__wrapper">
+                        {% for i in (1..5) limit:ceilNumber %}
+                            <span class="progress-bar__list {{ value | handleize }} {% if floorNumber!=ceilNumber and forloop.last %}half{% endif %}"></span>
+                        {% endfor %}
+                        {% for i in (1..5) limit:rest_value %}
+                        <span class="progress-bar__list rest_value {{ value | handleize }} {% if floorNumber!=ceilNumber and forloop.last %}{% endif %}"></span>
+                        {% endfor %}
+                      </div>
+                    </div>
+                </div>
+                {%- assign product_form_id = 'product-form-' | append: section.id -%}
+                <div class="variant-title">{{ variant.title }}</div>
               </div>
 
-              <div class="variant-title">{{ variant.title }}</div>
-              <div class="variant-price">{{ variant.price | money_with_currency }}</div>
+              <div class="variant-buying">
+                <div class="variant-price">{{ variant.price | money_with_currency }}</div>
+                {%- render 'buy-buttons',
+                  block: block,
+                  product: product,
+                  product_form_id: product_form_id,
+                  variant_id: variant.id,
+                  show_pickup_availability: true
+                -%}
+              </div>
             </div>
-          </li>
+          </div>
           {% endif %}
         {% endfor %}
-   </ul>
+    </div>
+    <div class="compare-vairant">
+      <button class="compare-variant-btn" type="button" disabled>Select one more to compare</button>
+    </div>
 </div>
+
 {% schema %}
 {
     "name": "product variant",
@@ -69,3 +152,4 @@
 {% endschema %}
 
 <script src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
