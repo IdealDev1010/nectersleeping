@@ -1,7 +1,7 @@
 {{ 'video-banner.css' | asset_url | stylesheet_tag}}
 
 <div class="video-banner-container">
-    <div class="video-content" style="padding-bottom: {{ 1 | divided_by: section.settings.video.aspect_ratio | times: 100 }}%">
+    <div class="video-content">
         {{
             section.settings.video
             | video_tag:
