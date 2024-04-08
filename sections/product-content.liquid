@@ -48,7 +48,7 @@
 
       <div class="inline-flex gap-1.5 p-3 border border-blue-100 border-solid {% if section.blocks.size > 3 %}border-l-0 border-r-0 sm:border-l-2 sm:border-r-2 sm:rounded-13 items-start sm:items-center w-screen sm:w-auto overflow-x-auto no-scrollbar -ml-12 sm:mx-auto{% else %}rounded-13 items-center mx-auto{% endif %}">
         {% for block in section.blocks %}
-          <button @click="activeTab = {{ forloop.index }}" :class="{ 'active': activeTab === {{ forloop.index }} }" class="transition-all duration-500 whitespace-nowrap {% if section.blocks.size > 2 %}px-5 md:px-12{% else %}px-12{% endif %} py-5 text-2xl md:text-3xl font-semibold rounded-full text-blue-100 [&.active]:bg-blue [&.active]:text-white {% if forloop.first %}active{% endif %}" data-button-id="{{ block.index }}">{{ block.settings.btn_text }}</button>       
+          <button @click="activeTab = {{ forloop.index }}" :class="{ 'active': activeTab === {{ forloop.index }} }" class="transition-all duration-500 whitespace-nowrap {% if section.blocks.size > 2 %}px-5 md:px-12{% else %}px-12{% endif %} py-5 text-2xl md:text-3xl font-semibold rounded-full text-blue-100 [&.active]:bg-blue hover:bg-gray-light [&.active]:text-white {% if forloop.first %}active{% endif %}" data-button-id="{{ block.index }}">{{ block.settings.btn_text }}</button>       
         {% endfor %}
       </div>
       <div class="w-full mt-24 md:mt-32">
@@ -69,9 +69,11 @@
             <div class="md:absolute top-0 left-0 flex flex-col gap-0 z-10 md:grid md:w-full md:grid-cols-2 md:auto-cols-[auto] lg:gap-72 md:gap-y-100">             
               <div class="absolute left-0 flex flex-col text-left md:relative top-40 md:top-0">                   
                   <div class="z-10 flex items-center gap-5 px-6 py-3 mb-3 rounded-full content-title w-fit">
+                    {% if block.settings.content_icon1 != blank %}
                       <span class=" w-700 h-700 *:w-full *:h-full">
-                        {{ section.settings.content_icon | img_url: '20x' | img_tag }}
-                      </span>
+                        {{ block.settings.content_icon1 | img_url: '20x' | img_tag }}
+                      </span>                    
+                    {% endif %}  
                       <p class="text-3xl font-medium text-blue-100 md:text-ss leading-11">{{ block.settings.content_1_title }}</p>
                   </div>                   
                   <div class="hidden leading-9 text-black-150 text-dd w-dm lg:block">{{ block.settings.content_1_description }}</div>
@@ -81,9 +83,11 @@
               </div>
               <div class="absolute top-0 right-0 flex flex-col items-end text-right md:relative max-md:order-minus">                
                   <div class="z-10 flex items-center gap-5 px-6 py-3 mb-3 rounded-full w-fit content-title">
+                    {% if block.settings.content_icon2 != blank %}
                       <span class=" w-700 h-700 *:w-full *:h-full">
-                          {{ section.settings.content_icon | img_url: '20x' | img_tag }}
-                        </span>
+                        {{ block.settings.content_icon2 | img_url: '20x' | img_tag }}
+                      </span>                    
+                    {% endif %}  
                       <p class="text-3xl font-medium text-blue-100 md:text-ss leading-11">{{ block.settings.content_2_title }}</p>                    
                   </div>
                   <div class="hidden leading-9 text-black-150 text-dd w-dm lg:block">{{ block.settings.content_2_description }}</div>
@@ -93,9 +97,11 @@
               </div>
               <div class="absolute flex-col hidden text-left md:relative md:flex">                 
                   <div class="z-10 flex items-center gap-5 px-6 py-3 mb-3 rounded-full w-fit content-title">
-                      <span class="w-700 h-700 *:w-full *:h-full">
-                          {{ section.settings.content_icon | img_url: '20x' | img_tag }}
-                        </span>
+                    {% if block.settings.content_icon3 != blank %}
+                      <span class=" w-700 h-700 *:w-full *:h-full">
+                        {{ block.settings.content_icon3 | img_url: '20x' | img_tag }}
+                      </span>                    
+                    {% endif %}  
                       <p class="text-3xl font-medium text-blue-100 md:text-ss leading-11">{{ block.settings.content_3_title }}</p>
                   </div>                  
                 <div class="hidden leading-9 text-black-150 text-dd w-dm lg:block">{{ block.settings.content_3_description }}</div>
@@ -105,9 +111,11 @@
               </div>
               <div class="absolute bottom-0 right-0 flex flex-col items-end text-right md:relative max-md:order-1">                 
                   <div class="z-10 flex items-center gap-5 px-6 py-3 mb-3 rounded-full w-fit content-title">
+                    {% if block.settings.content_icon4 != blank %}
                       <span class=" w-700 h-700 *:w-full *:h-full">
-                          {{ section.settings.content_icon | img_url: '20x' | img_tag }}
-                        </span>
+                        {{ block.settings.content_icon4 | img_url: '20x' | img_tag }}
+                      </span>                    
+                    {% endif %}  
                       <p class="text-3xl font-medium text-blue-100 md:text-ss leading-11">{{ block.settings.content_4_title }}</p>
                   </div>                 
                 <div class="hidden leading-9 text-black-150 text-dd w-dm lg:block">{{ block.settings.content_4_description }}</div>
@@ -117,9 +125,11 @@
               </div>
               <div class="absolute left-0 flex flex-col text-left md:relative bottom-32 md:bottom-0">                  
                   <div class="z-10 flex items-center gap-5 px-6 py-3 mb-3 rounded-full flex-nowrap w-fit content-title">
+                    {% if block.settings.content_icon5 != blank %}
                       <span class=" w-700 h-700 *:w-full *:h-full">
-                          {{ section.settings.content_icon | img_url: '20x' | img_tag }}
-                        </span>
+                        {{ block.settings.content_icon5 | img_url: '20x' | img_tag }}
+                      </span>                    
+                    {% endif %}  
                       <p class="text-3xl font-medium text-blue-100 md:text-ss leading-11">{{ block.settings.content_5_title }}</p>
                   </div>                 
                 <div class="hidden leading-9 text-black-150 text-dd w-dm lg:block">{{ block.settings.content_5_description }}</div>
@@ -129,9 +139,9 @@
               </div>
               <div class="absolute flex-col items-end hidden text-right md:relative md:flex">                
                   <div class="z-10 flex items-center gap-5 px-6 py-3 mb-3 rounded-full w-fit content-title">
-                    {% if section.settings.content_icon != blank %}
+                    {% if block.settings.content_icon6 != blank %}
                       <span class=" w-700 h-700 *:w-full *:h-full">
-                        {{ section.settings.content_icon | img_url: '20x' | img_tag }}
+                        {{ block.settings.content_icon6 | img_url: '20x' | img_tag }}
                       </span>                    
                     {% endif %}                    
                       <p class="text-3xl font-medium text-blue-100 md:text-ss leading-11">{{ block.settings.content_6_title }}</p>
@@ -166,11 +176,7 @@
         "label": "Sub Text",
         "default": "<p>text</p>"
       },
-      {
-        "type": "image_picker",
-        "id": "content_icon",
-        "label":"Content Icon" 
-      },
+   
       {
         "type": "color_background",
         "id": "content_background",
@@ -204,6 +210,11 @@
             "content": "Content 1"
           },
           {
+            "type": "image_picker",
+            "id": "content_icon1",
+            "label":"Content Icon" 
+          },
+          {
             "type": "text",
             "id": "content_1_title",
             "label": "Content 1 title",
@@ -218,6 +229,11 @@
           {
             "type": "header",
             "content": "Content 2"
+          },
+          {
+            "type": "image_picker",
+            "id": "content_icon2",
+            "label":"Content Icon" 
           },
           {
             "type": "text",
@@ -236,6 +252,11 @@
             "content": "Content 3"
           },
           {
+            "type": "image_picker",
+            "id": "content_icon3",
+            "label":"Content Icon" 
+          },
+          {
             "type": "text",
             "id": "content_3_title",
             "label": "Content 3 title",
@@ -250,6 +271,11 @@
           {
             "type": "header",
             "content": "Content 4"
+          },
+          {
+            "type": "image_picker",
+            "id": "content_icon4",
+            "label":"Content Icon" 
           },
           {
             "type": "text",
@@ -268,6 +294,11 @@
             "content": "Content 5"
           },
           {
+            "type": "image_picker",
+            "id": "content_icon5",
+            "label":"Content Icon" 
+          },
+          {
             "type": "text",
             "id": "content_5_title",
             "label": "Content 5 title",
@@ -282,6 +313,11 @@
           {
             "type": "header",
             "content": "Content 6"
+          },
+          {
+            "type": "image_picker",
+            "id": "content_icon6",
+            "label":"Content Icon" 
           },
           {
             "type": "text",
