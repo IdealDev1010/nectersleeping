@@ -48,8 +48,7 @@
 
       <div class="inline-flex gap-1.5 p-3 border border-blue-100 border-solid {% if section.blocks.size > 3 %}border-l-0 border-r-0 sm:border-l-2 sm:border-r-2 sm:rounded-13 items-start sm:items-center w-screen sm:w-auto overflow-x-auto no-scrollbar -ml-12 sm:mx-auto{% else %}rounded-13 items-center mx-auto{% endif %}">
         {% for block in section.blocks %}
-          <button @click="activeTab = {{ forloop.index }}" :class="{ 'active': activeTab === {{ forloop.index }} }" class="tab-link transition-all duration-500 whitespace-nowrap {% if section.blocks.size > 2 %}px-5 md:px-12{% else %}px-12{% endif %} py-5 text-2xl md:text-3xl font-semibold rounded-full text-blue-100 [&.active]:bg-blue [&.active]:text-white {% if forloop.first %}active{% endif %}" data-button-id="{{ block.index }}">{{ block.settings.btn_text }}</button>
-       
+          <button @click="activeTab = {{ forloop.index }}" :class="{ 'active': activeTab === {{ forloop.index }} }" class="transition-all duration-500 whitespace-nowrap {% if section.blocks.size > 2 %}px-5 md:px-12{% else %}px-12{% endif %} py-5 text-2xl md:text-3xl font-semibold rounded-full text-blue-100 [&.active]:bg-blue [&.active]:text-white {% if forloop.first %}active{% endif %}" data-button-id="{{ block.index }}">{{ block.settings.btn_text }}</button>       
         {% endfor %}
       </div>
       <div class="w-full mt-24 md:mt-32">
