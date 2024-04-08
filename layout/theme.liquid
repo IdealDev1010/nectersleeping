@@ -31,6 +31,9 @@
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+   
+    
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
@@ -42,8 +45,17 @@
       assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
       assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
     %}
-
+    {% comment %} <link href="https://cdn.jsdelivr.net/npm/tailwindcss@1.7.4/dist/tailwind.min.css" rel="stylesheet"> 
+  {% endcomment %}
     {% style %}
+     @font-face {
+      font-family: 'Athletics';
+      src: url("{{ '../assets/Athletics-Bold.ttf' | asset_url}}") format('truetype');
+      font-weight: 500;
+      font-display: swap;
+      font-style: normal;
+    }
+    
       {{ settings.type_body_font | font_face: font_display: 'swap' }}
       {{ body_font_bold | font_face: font_display: 'swap' }}
       {{ body_font_italic | font_face: font_display: 'swap' }}
@@ -252,6 +264,8 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'application.css' | asset_url | stylesheet_tag }}
+    {{ 'tailwind.css'. | asset_url | stylesheet_tag }}
 
     {%- unless settings.type_body_font.system? -%}
       <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
