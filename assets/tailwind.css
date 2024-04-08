@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.translate-50-neg-50 {
+    @apply transform;
+    transform: translate(50%, -50%);
+  }

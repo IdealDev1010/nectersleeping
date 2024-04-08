@@ -19,7 +19,7 @@
   }
 {%- endstyle -%}
 
-<div class="section--{{ section.id }}">
+<div class="section--{{ section.id }} flex">
     <div class="page-width">
         <div class="text-with-imagebanner-container">
             <div class="text-with-imagebanner__text">
@@ -31,16 +31,18 @@
             <div class="imagebanner-container">
                 {%- for block in section.blocks -%}
                 <div class="imagebanner">
-                    <div class="imagebanner__image">
+                    <div class="rounded-md">
                         {{ block.settings.image | img_url: '550x' | img_tag }}
                     </div>
-                    <div class="imagebanner__info">
-                        <p class="imagebanner__title">{{ block.settings.title }}</p>
+                    <div class="text-sm">
+                        <p class="text-black">{{ block.settings.title }}</p>
                         <div class="imagebanner__description">{{ block.settings.description }}</div>
                         <div class="imagebanner__button">
-                            <a href="{{ block.settings.btn_url }}" class="button">
+                            <a href="{{ block.settings.btn_url }}" class="button button--{{ block.settings.btn_style }}">
                                 <span class="button-text">{{ block.settings.btn_text }}</span>
-                                {% render 'icon-btn-arrow' %}
+                                {% if block.settings.btn_arrow %}
+                                    {% render 'icon-btn-arrow' %}
+                                {% endif %}
                             </a>
                         </div>
                     </div>
@@ -121,6 +123,28 @@
                 "type": "url",
                 "id": "btn_url",
                 "label": "Button url"
+            },
+            {
+                "type": "select",
+                "options": [
+                    {
+                        "value": "primary",
+                        "label": "Primary"
+                    },
+                    {
+                        "value": "secondary",
+                        "label": "Secondary"
+                    }
+                ],
+                "id": "btn_style",
+                "label": "BUtton Style",
+                "default": "primary"
+            },
+            {
+                "type": "checkbox",
+                "id": "btn_arrow",
+                "label": "Button Arrow",
+                "default": false
             }
         ]
       }

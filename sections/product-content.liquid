@@ -1,0 +1,314 @@
+<style>
+  .content-title {
+    background: {{ section.settings.content_background }};
+  }
+  .tab-animation-border {
+    border-image: url("data:image/svg+xml,%3Csvg width='15' height='15' viewBox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M5 0H0V2V5H2V2H5V0ZM0 10V15H2H5V13H2V10H0ZM10 15H15V13V10H13V13H10V15ZM15 5V0H13H10V2H13V5H15Z' fill='%2300026e'/%3E%3C/svg%3E%0A") 1 round;
+  }
+  .tab-content:not(.hidden) .tab-animation-border {
+    animation: 3s linear 0s 1 normal forwards running borderAnimation;
+  }
+  @media (max-width: 768px) {
+    .tab-content:not(.hidden) .tab-animation-border {
+      animation: 2s linear 0s 1 normal forwards running borderMobileAnimation;
+    }
+  }
+  @keyframes borderAnimation {
+    0% {
+      width: 10px;
+      height: 0;
+    };
+    50% {
+      width: 100%;
+      height: 0;
+    }
+    60% {
+      width: 100%;
+      height: 0;
+    }
+    100% {
+      width: 100%;
+      height: 300px;
+    }
+  }
+  @keyframes borderMobileAnimation {
+    0% {
+      height: 0;
+    };
+    100% {
+      height: 300px;
+    }
+  }
+</style>
+
+<div class="px-12 mx-auto max-w-100 lg:px-44 ml:px-20">
+  <div  x-data="{activeTab:1}" class="w-full pt-16 text-center pb-28 md:pt-32 md:pb-24">
+      <h2 class="mb-6 text-5xl leading-tight tracking-wide text-blue-100 md:leading-3 lg:text-8xl lg:font-medium font-Athletics" >{{ section.settings.heading }}</h2>
+      <div class="mb-10 text-3xl font-normal md:text-ss leading-11 text-black-150">{{ section.settings.subtext }}</div>
+
+      <div class="inline-flex gap-1.5 p-3 border border-blue-100 border-solid {% if section.blocks.size > 3 %}border-l-0 border-r-0 md:border-l-2 md:border-r-2 md:rounded-13 items-start md:items-center w-screen md:w-auto overflow-x-auto no-scrollbar -ml-12 md:mx-auto{% else %}rounded-13 items-center mx-auto{% endif %}">
+        {% for block in section.blocks %}
+          <button @click="activeTab = {{ forloop.index }}" :class="{ 'active': activeTab === {{ forloop.index }} }" class="tab-link transition-all duration-500 whitespace-nowrap {% if section.blocks.size > 2 %}px-5 md:px-12{% else %}px-12{% endif %} py-5 text-2xl md:text-3xl font-semibold rounded-full text-blue-100 [&.active]:bg-blue [&.active]:text-white {% if forloop.first %}active{% endif %}" data-button-id="{{ block.index }}">{{ block.settings.btn_text }}</button>
+       
+        {% endfor %}
+      </div>
+      <div class="w-full mt-24 md:mt-32">
+        {%- for block in section.blocks -%}  
+          <div x-show="activeTab === {{ forloop.index }}" :class="{ 'hidden': activeTab !== {{ forloop.index }} }" class="tab-content relative flex items-center justify-center md:pt-24 md:pb-80 pt-80 pb-72 {% unless forloop.first %}hidden{% endunless %}">                
+            <a href="{{ block.settings.img_link }}" class="relative tab-page-link">
+              {% if block.settings.image != blank %}
+                <img
+                  class="bg-pink-100 rounded-full"
+                  src="{{ block.settings.image | image_url }}"
+                  alt="{{ block.settings.image | escape }}"
+                  height="auto"
+                  width="auto"
+                  loading="lazy"
+                >    
+              {% endif %}
+            </a>  
+            <div class="md:absolute top-0 left-0 flex flex-col gap-0 z-10 md:grid md:w-full md:grid-cols-2 md:auto-cols-[auto] lg:gap-72 md:gap-y-100">             
+              <div class="absolute left-0 flex flex-col text-left md:relative top-40 md:top-0">                   
+                  <div class="z-10 flex items-center gap-5 px-6 py-3 mb-3 rounded-full content-title w-fit">
+                      <span class=" w-700 h-700 *:w-full *:h-full">
+                        {{ section.settings.content_icon | img_url: '20x' | img_tag }}
+                      </span>
+                      <p class="text-3xl font-medium text-blue-100 md:text-ss leading-11">{{ block.settings.content_1_title }}</p>
+                  </div>                   
+                  <div class="hidden leading-9 text-black-150 text-dd w-dm lg:block">{{ block.settings.content_1_description }}</div>
+                  <div class="tab-animation-border absolute left-20 lg:w-1 md:left-0 block md:max-w-[80%] lg:max-w-[91%] md:w-11/12 max-h-[210px] h-[210px] border border-t-2 border-b-0 border-l-0 border-r-1 md:border-r-2 border-blue-100 border-dashed top-10">                 
+                    <span class="absolute bottom-0 block w-4 h-4 translate-y-2 rounded-full -right-2 md:right-0 md:translate-x-2 bg-blue"></span>
+                  </div>
+              </div>
+              <div class="absolute top-0 right-0 flex flex-col items-end text-right md:relative max-md:order-minus">                
+                  <div class="z-10 flex items-center gap-5 px-6 py-3 mb-3 rounded-full w-fit content-title">
+                      <span class=" w-700 h-700 *:w-full *:h-full">
+                          {{ section.settings.content_icon | img_url: '20x' | img_tag }}
+                        </span>
+                      <p class="text-3xl font-medium text-blue-100 md:text-ss leading-11">{{ block.settings.content_2_title }}</p>                    
+                  </div>
+                  <div class="hidden leading-9 text-black-150 text-dd w-dm lg:block">{{ block.settings.content_2_description }}</div>
+                  <div class="tab-animation-border  md:max-w-[80%] lg:max-w-[96%] absolute md:right-0 right-32 w-1 max-h-[270px] h-[270px] block md:w-full md:max-h-[180px] md:h-[180px] border border-t-2 border-b-0 border-l-1 md:border-l-2 border-r-0 border-blue-100 border-dashed top-10">
+                    <span class="absolute bottom-0 block w-4 h-4 translate-y-2 rounded-full -left-2 bg-blue"></span>
+                </div>
+              </div>
+              <div class="absolute flex-col hidden text-left md:relative md:flex">                 
+                  <div class="z-10 flex items-center gap-5 px-6 py-3 mb-3 rounded-full w-fit content-title">
+                      <span class="w-700 h-700 *:w-full *:h-full">
+                          {{ section.settings.content_icon | img_url: '20x' | img_tag }}
+                        </span>
+                      <p class="text-3xl font-medium text-blue-100 md:text-ss leading-11">{{ block.settings.content_3_title }}</p>
+                  </div>                  
+                <div class="hidden leading-9 text-black-150 text-dd w-dm lg:block">{{ block.settings.content_3_description }}</div>
+                <div class="absolute left-0 block md:max-w-[80%] lg:max-w-[83%] w-10/12 h-1 border border-t-2 border-b-0 border-l-0 border-r-2 border-blue-100 border-dashed max-h-1 tab-animation-border top-10">
+                  <span class="absolute right-0 block w-4 h-4 translate-x-2 rounded-full -bottom-1 -top-2 bg-blue"></span>
+                </div>
+              </div>
+              <div class="absolute bottom-0 right-0 flex flex-col items-end text-right md:relative max-md:order-1">                 
+                  <div class="z-10 flex items-center gap-5 px-6 py-3 mb-3 rounded-full w-fit content-title">
+                      <span class=" w-700 h-700 *:w-full *:h-full">
+                          {{ section.settings.content_icon | img_url: '20x' | img_tag }}
+                        </span>
+                      <p class="text-3xl font-medium text-blue-100 md:text-ss leading-11">{{ block.settings.content_4_title }}</p>
+                  </div>                 
+                <div class="hidden leading-9 text-black-150 text-dd w-dm lg:block">{{ block.settings.content_4_description }}</div>
+                <div class="tab-animation-border absolute right-28 w-1 max-h-[270px] h-[270px] bottom-10 md:right-0 block md:max-w-[81%] lg:max-w-[95%] md:w-[95%] md:max-h-1 md:h-1 border border-t-2 border-b-0 border-l-1 md:border-l-2 border-r-0 border-blue-100 border-dashed md:top-10">
+                  <span class="absolute block w-4 h-4 rounded-full -top-2 -left-2 md:-bottom-1 bg-blue"></span>
+                </div>
+              </div>
+              <div class="absolute left-0 flex flex-col text-left md:relative bottom-32 md:bottom-0">                  
+                  <div class="z-10 flex items-center gap-5 px-6 py-3 mb-3 rounded-full flex-nowrap w-fit content-title">
+                      <span class=" w-700 h-700 *:w-full *:h-full">
+                          {{ section.settings.content_icon | img_url: '20x' | img_tag }}
+                        </span>
+                      <p class="text-3xl font-medium text-blue-100 md:text-ss leading-11">{{ block.settings.content_5_title }}</p>
+                  </div>                 
+                <div class="hidden leading-9 text-black-150 text-dd w-dm lg:block">{{ block.settings.content_5_description }}</div>
+                <div class="tab-animation-border absolute left-32 w-1 md:max-w-[81%] lg:max-w-[96%] max-h-[210px] h-[210px] md:left-0 block md:w-full md:max-h-[220px] md:h-[200px] -translate-y-full border border-t-0 border-b-2 border-l-0 border-r-1 md:border-r-2 border-blue-100 border-dashed top-10">
+                  <span class="absolute right-0 block w-4 h-4 translate-x-2 rounded-full -top-2 bg-blue"></span>
+                </div>
+              </div>
+              <div class="absolute flex-col items-end hidden text-right md:relative md:flex">                
+                  <div class="z-10 flex items-center gap-5 px-6 py-3 mb-3 rounded-full w-fit content-title">
+                    {% if section.settings.content_icon != blank %}
+                      <span class=" w-700 h-700 *:w-full *:h-full">
+                        {{ section.settings.content_icon | img_url: '20x' | img_tag }}
+                      </span>                    
+                    {% endif %}                    
+                      <p class="text-3xl font-medium text-blue-100 md:text-ss leading-11">{{ block.settings.content_6_title }}</p>
+                  </div>                  
+                <div class="hidden leading-9 text-black-150 text-dd w-dm lg:block">{{ block.settings.content_6_description }}</div>
+                <div class="tab-animation-border absolute md:max-w-[81%] lg:max-w-[96%] right-0 block w-full max-h-[160px] h-[160px] -translate-y-full border border-t-0 border-b-2 border-l-2 border-r-0 border-blue-100 border-dashed top-10">
+                  <span class="absolute block w-4 h-4 rounded-full -left-2 -top-2 bg-blue"></span>
+                </div>
+              </div>              
+            </div>  
+          </div>
+        {% endfor %}
+      </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Product content",
+    "tag": "section",
+    "class": "product-with-content",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Header",
+        "default": "text"
+      },
+      {
+        "type": "richtext",
+        "id": "subtext",
+        "label": "Sub Text",
+        "default": "<p>text</p>"
+      },
+      {
+        "type": "image_picker",
+        "id": "content_icon",
+        "label":"Content Icon" 
+      },
+      {
+        "type": "color_background",
+        "id": "content_background",
+        "label": "Content title background",
+        "default": "#ffffff"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "content",
+        "name": "Content",
+        "settings": [
+          {
+            "type": "text",
+            "id": "btn_text",
+            "label": "Btn text",
+            "default": "text"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "url",
+            "id": "img_link",
+            "label": "Image Link"
+          },
+          {
+            "type": "header",
+            "content": "Content 1"
+          },
+          {
+            "type": "text",
+            "id": "content_1_title",
+            "label": "Content 1 title",
+            "default": "text"
+          },
+          {
+            "type": "richtext",
+            "id": "content_1_description",
+            "label": "Content 1 description",
+            "default": "<p>text</p>"
+          },
+          {
+            "type": "header",
+            "content": "Content 2"
+          },
+          {
+            "type": "text",
+            "id": "content_2_title",
+            "label": "Content 2 title",
+            "default": "text"
+          },
+          {
+            "type": "richtext",
+            "id": "content_2_description",
+            "label": "Content 2 description",
+            "default": "<p>text</p>"
+          },
+          {
+            "type": "header",
+            "content": "Content 3"
+          },
+          {
+            "type": "text",
+            "id": "content_3_title",
+            "label": "Content 3 title",
+            "default": "text"
+          },
+          {
+            "type": "richtext",
+            "id": "content_3_description",
+            "label": "Content 3 description",
+            "default": "<p>text</p>"
+          },
+          {
+            "type": "header",
+            "content": "Content 4"
+          },
+          {
+            "type": "text",
+            "id": "content_4_title",
+            "label": "Content 4 title",
+            "default": "text"
+          },
+          {
+            "type": "richtext",
+            "id": "content_4_description",
+            "label": "Content 4 description",
+            "default": "<p>text</p>"
+          },
+          {
+            "type": "header",
+            "content": "Content 5"
+          },
+          {
+            "type": "text",
+            "id": "content_5_title",
+            "label": "Content 5 title",
+            "default": "text"
+          },
+          {
+            "type": "richtext",
+            "id": "content_5_description",
+            "label": "Content 5 description",
+            "default": "<p>text</p>"
+          },
+          {
+            "type": "header",
+            "content": "Content 6"
+          },
+          {
+            "type": "text",
+            "id": "content_6_title",
+            "label": "Content 6 title",
+            "default": "text"
+          },
+          {
+            "type": "richtext",
+            "id": "content_6_description",
+            "label": "Content 6 description",
+            "default": "<p>text</p>"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Product content",
+        "blocks": [
+          {
+            "type": "content"
+          }
+        
+        ]
+      }
+    ]
+  }
+{% endschema %}

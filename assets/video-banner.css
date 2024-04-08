@@ -1,8 +1,10 @@
+
+
+
 .video-content {
     position: relative;
     width: 100%;
     overflow: hidden;
-    height: 100vh;
 }
 
 .video-content video {
@@ -13,4 +15,9 @@
     left: 0;
     object-fit: cover;
     object-position: center;
+}
+@media (max-width: 768px) {
+    .video-content {
+        padding-bottom: 120% !important;
+    }
 }
